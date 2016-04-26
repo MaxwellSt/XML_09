@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<group>
+<student firstname="Steven" groupnumber="1" lastname="Rogers">
+<subject mark="3" title="math"/>
+<subject mark="4" title="geometry"/>
+<subject mark="5" title="literature"/>
+</student>
+<student firstname="Peter" groupnumber="1" lastname="Parker">
+<subject mark="5" title="math"/>
+<subject mark="4" title="geometry"/>
+</student>
+<student firstname="Bruce" groupnumber="1" lastname="Banner">
+<subject mark="3" title="math"/>
+<subject mark="3" title="geometry"/>
+<subject mark="4" title="literature"/>
+</student>
+<student firstname="Tony" groupnumber="1" lastname="Stark">
+<subject mark="3" title="math"/>
+<subject mark="4" title="geometry"/>
+<subject mark="5" title="literature"/>
+</student>
+</group>
