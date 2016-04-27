@@ -11,6 +11,7 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.math.BigDecimal;
 
+
 /**
  * Created by maxim.stetsenko on 26.04.2016.
  */
@@ -19,11 +20,10 @@ public class ParserXML {
     public static void main(String[] args) {
 
         DOMParser("09.xml", "09_result_DOM.xml");
-        SAXParser("09.xml", "09_result_SAX.xml");
 
     }
 
-    private static void DOMParser(String in, String out){
+    private static void DOMParser(String in, String out) {
         //DOM parser
         try {
             File inputFile = new File(in);
@@ -88,13 +88,13 @@ public class ParserXML {
                         }
                     }
                     String average = "0";
-                    if(eStudent.getElementsByTagName("average").getLength() > 0) {
+                    if (eStudent.getElementsByTagName("average").getLength() > 0) {
                         average = eStudent.getElementsByTagName("average").item(0).getTextContent();
                     }
 
                     float correctAverage = 0.0f;
-                    if(nList2.getLength() != 0){
-                        correctAverage = (float) sum/nList2.getLength();
+                    if (nList2.getLength() != 0) {
+                        correctAverage = (float) sum / nList2.getLength();
                     }
 
                     float fAverage = Float.parseFloat(average);
@@ -108,9 +108,9 @@ public class ParserXML {
                     //create subjects element
                     Element newAverage = docOut.createElement("average");
 
-                    if(!x1.equals(x2)){
+                    if (!x1.equals(x2)) {
                         newAverage.appendChild(docOut.createTextNode(x1.toString()));
-                    }else{
+                    } else {
                         newAverage.appendChild(docOut.createTextNode(average));
                     }
                     student.appendChild(newAverage);
@@ -129,17 +129,4 @@ public class ParserXML {
             e.printStackTrace();
         }
     }
-
-    private static void SAXParser(String in, String out){
-
-    }
-
-//    private static float round(float number, int scale) {
-//        int pow = 10;
-//        for (int i = 1; i < scale; i++)
-//            pow *= 10;
-//        double tmp = number * pow;
-//        int temp = (int)((tmp - (int) tmp) >= 0.5 ? tmp + 1 : tmp);
-//        return (float)  temp / pow;
-//    }
 }
