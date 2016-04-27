@@ -6,7 +6,7 @@
 		<subject title = "math" mark = "3"/>
 		<subject title = "geometry" mark = "4"/>
 		<subject title = "literature" mark = "5"/>
-		<average>3</average>
+		<average>4.01</average>
 	</student>
 	<student firstname = "Peter" lastname = "Parker" groupnumber = "1">
 		<subject title = "math" mark = "5"/>

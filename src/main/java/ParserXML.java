@@ -9,6 +9,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
+import java.math.BigDecimal;
 
 /**
  * Created by maxim.stetsenko on 26.04.2016.
@@ -42,6 +43,10 @@ public class ParserXML {
 
             for (int i = 0; i < nList.getLength(); i++) {
                 Node nStudent = nList.item(i);
+
+                float aver = 0.0f;
+                int sum = 0;
+
                 if (nStudent.getNodeType() == Node.ELEMENT_NODE) {
                     Element eStudent = (Element) nStudent;
 
@@ -78,13 +83,37 @@ public class ParserXML {
                             attr = docOut.createAttribute("mark");
                             attr.setValue(eSubject.getAttribute("mark"));
                             subject.setAttributeNode(attr);
+
+                            sum += Integer.parseInt(eSubject.getAttribute("mark"));
                         }
                     }
-
-                    if(eStudent.getElementsByTagName("average").getLength() > 0){
-                        String average = eStudent.getElementsByTagName("average").item(0).getTextContent();
+                    String average = "0";
+                    if(eStudent.getElementsByTagName("average").getLength() > 0) {
+                        average = eStudent.getElementsByTagName("average").item(0).getTextContent();
                     }
 
+                    float correctAverage = 0.0f;
+                    if(nList2.getLength() != 0){
+                        correctAverage = (float) sum/nList2.getLength();
+                    }
+
+                    float fAverage = Float.parseFloat(average);
+
+                    BigDecimal x1 = new BigDecimal(correctAverage);
+                    x1 = x1.setScale(1, BigDecimal.ROUND_HALF_UP);
+
+                    BigDecimal x2 = new BigDecimal(fAverage);
+                    x2 = x2.setScale(1, BigDecimal.ROUND_HALF_UP);
+
+                    //create subjects element
+                    Element newAverage = docOut.createElement("average");
+
+                    if(!x1.equals(x2)){
+                        newAverage.appendChild(docOut.createTextNode(x1.toString()));
+                    }else{
+                        newAverage.appendChild(docOut.createTextNode(average));
+                    }
+                    student.appendChild(newAverage);
                 }
             }
 
@@ -104,4 +133,13 @@ public class ParserXML {
     private static void SAXParser(String in, String out){
 
     }
+
+//    private static float round(float number, int scale) {
+//        int pow = 10;
+//        for (int i = 1; i < scale; i++)
+//            pow *= 10;
+//        double tmp = number * pow;
+//        int temp = (int)((tmp - (int) tmp) >= 0.5 ? tmp + 1 : tmp);
+//        return (float)  temp / pow;
+//    }
 }
